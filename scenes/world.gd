@@ -8,6 +8,71 @@ var crop : Dictionary
 
 @export var block : Dictionary[String, BlockData]
 
+# Auto-save timer
+var auto_save_timer : Timer
+
+func _ready():
+	Global.set_world_scene_reference(self)
+	
+	load_world_state()
+	
+	if not Global.has_save_file() and Global.player_name == "":
+		print("No save file found and no player data - creating default save")
+		Global.start_new_game("Player", "Kansas")
+	
+	auto_save_timer = Timer.new()
+	auto_save_timer.wait_time = 30.0
+	auto_save_timer.timeout.connect(_auto_save)
+	auto_save_timer.autostart = true
+	add_child(auto_save_timer)
+
+func load_world_state():
+	"""Load the world state from Global if it exists"""
+	if Global.current_world_scene is SaveGame:
+		var save_data = Global.current_world_scene as SaveGame
+		var world_state = save_data.load_world_state()
+		
+		water_level = world_state.water_levels
+		
+		crop = world_state.crop_data
+		for pos in crop:
+			var crop_data = crop[pos]
+			var crop_name = crop_data["name"]
+			var duration = crop_data["duration"]
+			
+			if block.has(crop_name):
+				var growth_index = 0
+				if duration >= 0:
+					if duration >= block[crop_name].duration:
+						growth_index = block[crop_name].atlas_coords.size() - 1
+					else:
+						growth_index = block[crop_name].growth_index(duration)
+				else:
+					growth_index = block[crop_name].atlas_coords.size() - 1
+				
+				set_tile(crop_name, pos, crop_layer, growth_index)
+		
+		Global.current_world_scene = null
+		print("World state loaded successfully")
+
+func get_world_state() -> Dictionary:
+	"""Return current world state for saving"""
+	return {
+		"water_levels": water_level,
+		"crop_data": crop
+	}
+
+func _auto_save():
+	print("Auto-save triggered")
+	Global.save_game()
+	print("Auto-save completed")
+
+func _unhandled_input(event):
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		# Save before returning to menu
+		Global.save_game()
+		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+
 func _physics_process(delta: float) -> void:
 	for pos in water_level:
 		water_level[pos] -= delta
@@ -39,11 +104,25 @@ func _input(event):
 				var tile_name = data.get_custom_data("tile_name")
 				watering_tile(tile_name, tile_pos, 1.0)
 				
-			harvesting(tile_pos)
+			var harvested = harvesting(tile_pos)
+			if harvested:
+				# Save after harvesting
+				Global.save_game()
 				
 		if event.button_index == MOUSE_BUTTON_RIGHT:
-			set_tile(Global.current_tool, tile_pos, crop_layer)
-			crop[tile_pos] = { "name" : Global.current_tool, "duration" : 0 }
+			plant_crop(tile_pos)
+
+func plant_crop(tile_pos: Vector2i):
+	"""Plant a crop and track the action"""
+	if Global.crops.has(Global.current_tool) and Global.crops[Global.current_tool] > 0:
+		set_tile(Global.current_tool, tile_pos, crop_layer)
+		crop[tile_pos] = { "name" : Global.current_tool, "duration" : 0 }
+		Global.crops[Global.current_tool] -= 1
+		Global.track_crop_planted()
+		
+		# Save after planting
+		Global.save_game()
+		print("Planted ", Global.current_tool, " at ", tile_pos)
 
 func get_snapped_position(global_pos: Vector2) -> Vector2i:
 	var local_pos = crop_layer.to_local(global_pos)
@@ -67,8 +146,14 @@ func drying_tile(pos):
 		#var tile_name = data.get_custom_data("tile_name")
 		#set_tile(tile_name, pos, ground)
 
-func harvesting(pos):
+func harvesting(pos) -> bool:
+	"""Harvest a crop and return true if something was harvested"""
 	if crop_layer.get_cell_source_id(pos) != -1 and crop.has(pos) and crop[pos]["duration"] < 0:
 		crop_layer.erase_cell(pos)
 		crop.erase(pos)
-		Global.budget += 100
+		var money_gained = 100
+		Global.budget += money_gained
+		Global.track_crop_harvested(money_gained)
+		print("Harvested crop at ", pos, " for $", money_gained)
+		return true
+	return false

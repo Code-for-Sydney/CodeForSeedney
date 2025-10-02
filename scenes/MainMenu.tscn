@@ -1,0 +1,122 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd4h2qj2v6u8x"]
+
+[ext_resource type="Script" path="res://scenes/MainMenu.gd" id="1_7xk4v"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_7xk4v")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.2, 0.3, 0.2, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "CodeForSeedney"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveInfoLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "New Game"
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="DeleteSaveButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Delete Save"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="NewGamePanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -180.0
+offset_right = 200.0
+offset_bottom = 180.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NewGamePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="NewGameLabel" type="Label" parent="NewGamePanel/VBoxContainer"]
+layout_mode = 2
+text = "New Game Setup"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="NewGamePanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayerNameLabel" type="Label" parent="NewGamePanel/VBoxContainer"]
+layout_mode = 2
+text = "Player Name:"
+
+[node name="PlayerNameInput" type="LineEdit" parent="NewGamePanel/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter your name"
+
+[node name="StateLabel" type="Label" parent="NewGamePanel/VBoxContainer"]
+layout_mode = 2
+text = "Select Your State:"
+
+[node name="StateDropdown" type="OptionButton" parent="NewGamePanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="NewGamePanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="NewGamePanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="NewGamePanel/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="StartGameButton" type="Button" parent="NewGamePanel/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start Game"
