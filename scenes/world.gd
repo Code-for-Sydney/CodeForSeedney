@@ -3,12 +3,15 @@ extends Node2D
 @onready var ground = $Ground
 @onready var crop_layer = $Crops
 
+@onready var season_label = $SeasonTimer/SeasonLabel
+@onready var time_label = $SeasonTimer/TimeLabel
+@onready var progress_bar = $SeasonTimer/ProgressBar
+
 var water_level : Dictionary
 var crop : Dictionary
 
 @export var block : Dictionary[String, BlockData]
 
-# Auto-save timer
 var auto_save_timer : Timer
 
 func _ready():
@@ -69,11 +72,13 @@ func _auto_save():
 
 func _unhandled_input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		# Save before returning to menu
 		Global.save_game()
 		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 
 func _physics_process(delta: float) -> void:
+	# Update timer UI
+	update_timer_ui()
+	
 	for pos in water_level:
 		water_level[pos] -= delta
 		if water_level[pos] <= 0:
@@ -106,7 +111,6 @@ func _input(event):
 				
 			var harvested = harvesting(tile_pos)
 			if harvested:
-				# Save after harvesting
 				Global.save_game()
 				
 		if event.button_index == MOUSE_BUTTON_RIGHT:
@@ -115,12 +119,15 @@ func _input(event):
 func plant_crop(tile_pos: Vector2i):
 	"""Plant a crop and track the action"""
 	if Global.crops.has(Global.current_tool) and Global.crops[Global.current_tool] > 0:
+		if not Global.can_plant_crop(Global.current_tool):
+			print("Cannot plant ", Global.current_tool, " in current season: ", Global.get_current_season_name())
+			return
+		
 		set_tile(Global.current_tool, tile_pos, crop_layer)
 		crop[tile_pos] = { "name" : Global.current_tool, "duration" : 0 }
 		Global.crops[Global.current_tool] -= 1
 		Global.track_crop_planted()
 		
-		# Save after planting
 		Global.save_game()
 		print("Planted ", Global.current_tool, " at ", tile_pos)
 
@@ -136,18 +143,13 @@ func set_tile(tile_name: String, cell_pos: Vector2i, layer: TileMapLayer, coord:
 func watering_tile(tile_name: String, pos: Vector2i, amount: float = 1.0):
 	if Global.water > 0:
 		water_level[pos] = amount
-		#set_tile(tile_name, pos, ground, 1)
 		Global.water -= 1
 
 func drying_tile(pos):
 	var tile_pos = get_snapped_position(pos)
 	var data = ground.get_cell_tile_data(tile_pos)
-	#if data:
-		#var tile_name = data.get_custom_data("tile_name")
-		#set_tile(tile_name, pos, ground)
 
 func harvesting(pos) -> bool:
-	"""Harvest a crop and return true if something was harvested"""
 	if crop_layer.get_cell_source_id(pos) != -1 and crop.has(pos) and crop[pos]["duration"] < 0:
 		crop_layer.erase_cell(pos)
 		crop.erase(pos)
@@ -157,3 +159,14 @@ func harvesting(pos) -> bool:
 		print("Harvested crop at ", pos, " for $", money_gained)
 		return true
 	return false
+
+func update_timer_ui():
+	if season_label:
+		season_label.text = Global.get_current_season_name()
+	
+	if time_label:
+		var time_remaining = Global.get_season_time_remaining()
+		time_label.text = Global.format_time(time_remaining)
+	
+	if progress_bar:
+		progress_bar.value = Global.get_season_progress()

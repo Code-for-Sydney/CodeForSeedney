@@ -8,6 +8,7 @@ extends Control
 @onready var new_game_panel: Panel = $NewGamePanel
 @onready var player_name_input: LineEdit = $NewGamePanel/VBoxContainer/PlayerNameInput
 @onready var state_dropdown: OptionButton = $NewGamePanel/VBoxContainer/StateDropdown
+@onready var state_info_label: RichTextLabel = $NewGamePanel/VBoxContainer/StateInfoLabel
 @onready var start_game_button: Button = $NewGamePanel/VBoxContainer/ButtonContainer/StartGameButton
 @onready var back_button: Button = $NewGamePanel/VBoxContainer/ButtonContainer/BackButton
 
@@ -88,6 +89,11 @@ func setup_state_dropdown():
 	var default_index = Global.us_states.find("Kansas")
 	if default_index != -1:
 		state_dropdown.selected = default_index
+	
+	if not state_dropdown.item_selected.is_connected(_on_state_selected):
+		state_dropdown.item_selected.connect(_on_state_selected)
+	
+	update_state_info()
 
 func _on_new_game_pressed():
 	"""Show the new game setup panel"""
@@ -95,6 +101,39 @@ func _on_new_game_pressed():
 		new_game_panel.visible = true
 	if player_name_input:
 		player_name_input.grab_focus()
+	update_state_info()
+
+func _on_state_selected(index: int):
+	"""Called when a state is selected from the dropdown"""
+	update_state_info()
+
+func update_state_info():
+	"""Update the state information display"""
+	if not state_dropdown or not state_info_label:
+		return
+	
+	if state_dropdown.selected >= 0:
+		var selected_state = Global.us_states[state_dropdown.selected]
+		var state_info = Global.get_state_info(selected_state)
+		
+		var difficulty_color = ""
+		match state_info.difficulty:
+			"easy": difficulty_color = "[color=green]"
+			"medium": difficulty_color = "[color=orange]"
+			"hard": difficulty_color = "[color=red]"
+		
+		var info_text = """[center]Temperature: %d°F | Moisture: %d%%
+Sunlight: %.1fh | Rainfall: %d"
+Difficulty: %s%s[/color][/center]""" % [
+			state_info.temp,
+			state_info.moisture,
+			state_info.sunlight,
+			state_info.rainfall,
+			difficulty_color,
+			state_info.difficulty.capitalize()
+		]
+		
+		state_info_label.text = info_text
 
 func _on_continue_pressed():
 	"""Load existing save and start the game"""
@@ -123,7 +162,6 @@ func _on_start_game_pressed():
 		
 	var player_name = player_name_input.text.strip_edges()
 	
-	# Validate input
 	if player_name.length() == 0:
 		show_error("Please enter your name!")
 		return
@@ -134,7 +172,6 @@ func _on_start_game_pressed():
 	
 	var selected_state = Global.us_states[state_dropdown.selected]
 	
-	# Start new game
 	Global.start_new_game(player_name, selected_state)
 	
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
