@@ -32,6 +32,10 @@ func _physics_process(delta: float) -> void:
 				set_tile(crop_name, pos, crop_layer, index)
 
 func _input(event):
+	if event.is_action_pressed("toggle_SMAPTop"):
+		print("hello")
+		$SoilMoisture.visible = !$SoilMoisture.visible
+		
 	if event is InputEventMouseButton and event.is_pressed():
 		var tile_pos = get_snapped_position(get_global_mouse_position())
 		
