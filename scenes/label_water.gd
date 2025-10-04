@@ -12,5 +12,6 @@ func _process(delta: float) -> void:
 
 
 func _on_button_buy_water_pressed() -> void:
-	Global.water += 10
-	Global.budget -= 10
+	if Global.budget > 0:
+		Global.water += 10
+		Global.budget -= 10
