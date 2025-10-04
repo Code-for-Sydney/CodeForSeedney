@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://ckavqb25bdaul"]
+[gd_scene load_steps=13 format=4 uid="uid://ckavqb25bdaul"]
 
 [ext_resource type="Script" uid="uid://cp56cckuuw614" path="res://scenes/world.gd" id="1_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://dws66rxf30rf3" path="res://ground.png" id="1_rwgxs"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://b3xrpxnodcraq" path="res://scripts/BlockData.gd" id="2_71j4m"]
 [ext_resource type="Resource" uid="uid://dep760y1v58kb" path="res://resources/soil.tres" id="3_qfnet"]
 [ext_resource type="Resource" uid="uid://bxdnmj8c5hbma" path="res://resources/wheat.tres" id="4_qfnet"]
+[ext_resource type="Script" uid="uid://nrbm8pniuh27" path="res://scripts/label_corn.gd" id="7_i7141"]
+[ext_resource type="Script" uid="uid://dk0qrlexbt8vi" path="res://scripts/label_budget.gd" id="8_4mrxx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k0juu"]
 texture = ExtResource("1_rwgxs")
@@ -58,3 +60,36 @@ tile_set = SubResource("TileSet_i7141")
 [node name="NDVI" type="TileMapLayer" parent="."]
 
 [node name="SoilMoisture" type="TileMapLayer" parent="."]
+
+[node name="Button_buy_corn" type="Button" parent="."]
+offset_left = 207.0
+offset_top = 324.0
+offset_right = 297.0
+offset_bottom = 355.0
+text = "BUY CORN"
+
+[node name="Label_corn" type="Label" parent="."]
+offset_left = 243.0
+offset_top = 301.0
+offset_right = 281.0
+offset_bottom = 350.0
+text = "10
+"
+script = ExtResource("7_i7141")
+
+[node name="Label_budget" type="Label" parent="."]
+offset_left = 31.0
+offset_top = 333.0
+offset_right = 95.0
+offset_bottom = 362.0
+text = "10000"
+script = ExtResource("8_4mrxx")
+
+[node name="Label_Budget_label" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 307.0
+offset_right = 88.0
+offset_bottom = 330.0
+text = "BUDGET"
+
+[connection signal="pressed" from="Button_buy_corn" to="Label_corn" method="_on_button_buy_corn_pressed"]
