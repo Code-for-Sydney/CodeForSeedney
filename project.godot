@@ -22,9 +22,9 @@ Global="*res://scripts/global.gd"
 [display]
 
 window/size/viewport_width=1280
-window/size/viewport_height=768
+window/size/viewport_height=850
 window/size/window_width_override=1280
-window/size/window_height_override=768
+window/size/window_height_override=850
 
 [input]
 
