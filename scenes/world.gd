@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var ground = $Ground
 @onready var crop_layer = $Crops
+@onready var woman_scene = preload("res://scenes/woman.tscn")
 
 @onready var season_label = $SeasonTimer/SeasonLabel
 @onready var time_label = $SeasonTimer/TimeLabel
@@ -28,6 +29,10 @@ func _ready():
 	auto_save_timer.timeout.connect(_auto_save)
 	auto_save_timer.autostart = true
 	add_child(auto_save_timer)
+	
+	var woman_instance = woman_scene.instantiate()
+	add_child(woman_instance)
+	woman_instance.position = Vector2(100, 100)
 
 func load_world_state():
 	"""Load the world state from Global if it exists"""
