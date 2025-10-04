@@ -8,8 +8,6 @@ var crop : Dictionary
 
 @export var block : Dictionary[String, BlockData]
 
-var currently_equipped : String = "corn"
-
 func _physics_process(delta: float) -> void:
 	for pos in water_level:
 		water_level[pos] -= delta
@@ -44,8 +42,8 @@ func _input(event):
 			harvesting(tile_pos)
 				
 		if event.button_index == MOUSE_BUTTON_RIGHT:
-			set_tile(currently_equipped, tile_pos, crop_layer)
-			crop[tile_pos] = { "name" : currently_equipped, "duration" : 0 }
+			set_tile(Global.current_tool, tile_pos, crop_layer)
+			crop[tile_pos] = { "name" : Global.current_tool, "duration" : 0 }
 
 func get_snapped_position(global_pos: Vector2) -> Vector2i:
 	var local_pos = ground.to_local(global_pos)
@@ -73,4 +71,4 @@ func harvesting(pos):
 	if crop_layer.get_cell_source_id(pos) != -1 and crop.has(pos) and crop[pos]["duration"] < 0:
 		crop_layer.erase_cell(pos)
 		crop.erase(pos)
-		Global.budget += 5
+		Global.budget += 100
