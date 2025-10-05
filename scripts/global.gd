@@ -404,3 +404,150 @@ func initialize_water_level(layer):
 		var topsoil_data = layer.get_cell_tile_data(cell_pos)
 		var topsoil_waterlevel = topsoil_data.get_custom_data("water_level")
 		water_level[Vector2i(cell_pos)] = topsoil_waterlevel
+
+func export_game_state() -> String:
+	"""Export the complete game state as a base64-encoded string"""
+	var world_state = {}
+	if current_world_scene and current_world_scene.has_method("get_world_state"):
+		world_state = current_world_scene.get_world_state()
+	
+	# Convert Vector2i keys to strings for JSON serialization
+	var water_level_serializable = {}
+	for key in water_level:
+		if key is Vector2i:
+			var key_string = str(key.x) + "," + str(key.y)
+			water_level_serializable[key_string] = water_level[key]
+		else:
+			water_level_serializable[str(key)] = water_level[key]
+	
+	# Convert Vector2i keys in world_state if they exist
+	var world_state_serializable = world_state.duplicate(true)
+	if world_state_serializable.has("water_levels"):
+		var water_levels_converted = {}
+		for key in world_state_serializable["water_levels"]:
+			if key is Vector2i:
+				var key_string = str(key.x) + "," + str(key.y)
+				water_levels_converted[key_string] = world_state_serializable["water_levels"][key]
+			else:
+				water_levels_converted[str(key)] = world_state_serializable["water_levels"][key]
+		world_state_serializable["water_levels"] = water_levels_converted
+	
+	if world_state_serializable.has("crop_data"):
+		var crop_data_converted = {}
+		for key in world_state_serializable["crop_data"]:
+			if key is Vector2i:
+				var key_string = str(key.x) + "," + str(key.y)
+				crop_data_converted[key_string] = world_state_serializable["crop_data"][key]
+			else:
+				crop_data_converted[str(key)] = world_state_serializable["crop_data"][key]
+		world_state_serializable["crop_data"] = crop_data_converted
+	
+	var game_state = {
+		"version": "1.0",
+		"player_name": player_name,
+		"selected_state": selected_state,
+		"budget": budget,
+		"crops": crops.duplicate(),
+		"water": water,
+		"fertiliser": fertiliser,
+		"water_level": water_level_serializable,
+		"total_crops_planted": total_crops_planted,
+		"total_crops_harvested": total_crops_harvested,
+		"total_money_earned": total_money_earned,
+		"game_time_elapsed": game_time_elapsed,
+		"current_season": current_season,
+		"world_state": world_state_serializable
+	}
+	
+	var json_string = JSON.stringify(game_state)
+	var bytes = json_string.to_utf8_buffer()
+	return Marshalls.raw_to_base64(bytes)
+
+func import_game_state(import_code: String) -> bool:
+	"""Import game state from a base64-encoded string"""
+	var bytes = Marshalls.base64_to_raw(import_code)
+	if bytes.size() == 0:
+		print("Failed to decode import code")
+		return false
+	
+	var json_string = bytes.get_string_from_utf8()
+	var json = JSON.new()
+	var parse_result = json.parse(json_string)
+	
+	if parse_result != OK:
+		print("Failed to parse import code: ", json.error_string)
+		return false
+	
+	var game_state = json.data
+	
+	# Validate the import data
+	if not game_state.has("version") or not game_state.has("player_name"):
+		print("Invalid import code format")
+		return false
+	
+	# Load the game state
+	player_name = game_state.get("player_name", "Imported Player")
+	selected_state = game_state.get("selected_state", "Kansas")
+	budget = game_state.get("budget", 1000)
+	crops = game_state.get("crops", {"corn": 10, "wheat": 10, "soy": 10})
+	water = game_state.get("water", 10)
+	fertiliser = game_state.get("fertiliser", 10)
+	
+	# Convert string keys back to Vector2i for water_level
+	var imported_water_level = game_state.get("water_level", {})
+	water_level = {}
+	for key in imported_water_level:
+		if key is String and "," in key:
+			var parts = key.split(",")
+			if parts.size() == 2:
+				var vector_key = Vector2i(int(parts[0]), int(parts[1]))
+				water_level[vector_key] = imported_water_level[key]
+		else:
+			water_level[key] = imported_water_level[key]
+	
+	total_crops_planted = game_state.get("total_crops_planted", 0)
+	total_crops_harvested = game_state.get("total_crops_harvested", 0)
+	total_money_earned = game_state.get("total_money_earned", 0)
+	game_time_elapsed = game_state.get("game_time_elapsed", 0.0)
+	current_season = game_state.get("current_season", "spring")
+	
+	# Store world state for loading in the world scene
+	if game_state.has("world_state"):
+		var save_game = SaveGame.new()
+		var world_state = game_state["world_state"]
+		if world_state.has("water_levels") and world_state.has("crop_data"):
+			# Convert string keys back to Vector2i for water_levels
+			var water_levels_converted = {}
+			for key in world_state["water_levels"]:
+				if key is String:
+					# Convert string key back to Vector2i
+					var parts = key.split(",")
+					if parts.size() == 2:
+						var vector_key = Vector2i(int(parts[0]), int(parts[1]))
+						water_levels_converted[vector_key] = world_state["water_levels"][key]
+				else:
+					water_levels_converted[key] = world_state["water_levels"][key]
+			
+			# Convert string keys back to Vector2i for crop_data
+			var crop_data_converted = {}
+			for key in world_state["crop_data"]:
+				if key is String:
+					# Convert string key back to Vector2i
+					var parts = key.split(",")
+					if parts.size() == 2:
+						var vector_key = Vector2i(int(parts[0]), int(parts[1]))
+						crop_data_converted[vector_key] = world_state["crop_data"][key]
+				else:
+					crop_data_converted[key] = world_state["crop_data"][key]
+			
+			save_game.save_world_state(water_levels_converted, crop_data_converted)
+		current_world_scene = save_game
+	
+	print("Successfully imported game state for player: ", player_name)
+	return true
+
+func generate_share_text() -> String:
+	"""Generate a shareable text string with website URL and import code"""
+	var import_code = export_game_state()
+	var share_text = "Visit my farm - https://code-for-sydney.github.io/CodeForSeedney/ | import code: " + import_code
+	return share_text

@@ -2,15 +2,21 @@ extends Control
 
 @onready var new_game_button: Button = $VBoxContainer/NewGameButton
 @onready var continue_button: Button = $VBoxContainer/ContinueButton
+@onready var import_button: Button = $VBoxContainer/ImportButton
 @onready var delete_save_button: Button = $VBoxContainer/DeleteSaveButton
 @onready var quit_button: Button = $VBoxContainer/QuitButton
 
 @onready var new_game_panel: Panel = $NewGamePanel
+@onready var import_panel: Panel = $ImportPanel
 @onready var player_name_input: LineEdit = $NewGamePanel/VBoxContainer/PlayerNameInput
 @onready var state_dropdown: OptionButton = $NewGamePanel/VBoxContainer/StateDropdown
 @onready var state_info_label: RichTextLabel = $NewGamePanel/VBoxContainer/StateInfoLabel
 @onready var start_game_button: Button = $NewGamePanel/VBoxContainer/ButtonContainer/StartGameButton
 @onready var back_button: Button = $NewGamePanel/VBoxContainer/ButtonContainer/BackButton
+
+@onready var import_code_input: TextEdit = $ImportPanel/VBoxContainer/ImportCodeInput
+@onready var import_load_button: Button = $ImportPanel/VBoxContainer/ImportButtonContainer/ImportLoadButton
+@onready var import_back_button: Button = $ImportPanel/VBoxContainer/ImportButtonContainer/ImportBackButton
 
 @onready var title_label: Label = $VBoxContainer/TitleLabel
 @onready var save_info_label: Label = $VBoxContainer/SaveInfoLabel
@@ -20,6 +26,8 @@ func _ready():
 		new_game_button.pressed.connect(_on_new_game_pressed)
 	if continue_button:
 		continue_button.pressed.connect(_on_continue_pressed)
+	if import_button:
+		import_button.pressed.connect(_on_import_pressed)
 	if delete_save_button:
 		delete_save_button.pressed.connect(_on_delete_save_pressed)
 	if quit_button:
@@ -28,6 +36,10 @@ func _ready():
 		start_game_button.pressed.connect(_on_start_game_pressed)
 	if back_button:
 		back_button.pressed.connect(_on_back_pressed)
+	if import_load_button:
+		import_load_button.pressed.connect(_on_import_load_pressed)
+	if import_back_button:
+		import_back_button.pressed.connect(_on_import_back_pressed)
 	
 	$background_audio.pitch_scale = randf_range(0.9, 1.1)
 	$background_audio.play()
@@ -38,6 +50,8 @@ func _ready():
 	
 	if new_game_panel:
 		new_game_panel.visible = false
+	if import_panel:
+		import_panel.visible = false
 	
 	if player_name_input:
 		player_name_input.placeholder_text = "Enter your name"
@@ -186,6 +200,37 @@ func _on_back_pressed():
 	if player_name_input:
 		player_name_input.text = ""
 
+func _on_import_pressed():
+	"""Show the import panel"""
+	if import_panel:
+		import_panel.visible = true
+	if import_code_input:
+		import_code_input.grab_focus()
+
+func _on_import_back_pressed():
+	"""Return to main menu from import panel"""
+	if import_panel:
+		import_panel.visible = false
+	if import_code_input:
+		import_code_input.text = ""
+
+func _on_import_load_pressed():
+	"""Load game from import code"""
+	if not import_code_input:
+		show_error("Import input not available!")
+		return
+	
+	var import_code = import_code_input.text.strip_edges()
+	
+	if import_code.length() == 0:
+		show_error("Please enter an import code!")
+		return
+	
+	if Global.import_game_state(import_code):
+		get_tree().change_scene_to_file("res://scenes/world.tscn")
+	else:
+		show_error("Invalid import code! Please check the code and try again.")
+
 func show_error(message: String):
 	"""Display an error message to the user"""
 	push_error(message)
@@ -197,3 +242,5 @@ func _input(event):
 			_on_start_game_pressed()
 		elif new_game_panel and new_game_panel.visible and event.keycode == KEY_ESCAPE:
 			_on_back_pressed()
+		elif import_panel and import_panel.visible and event.keycode == KEY_ESCAPE:
+			_on_import_back_pressed()

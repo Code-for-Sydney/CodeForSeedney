@@ -58,6 +58,10 @@ text = "New Game"
 layout_mode = 2
 text = "Continue"
 
+[node name="ImportButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Import Farm"
+
 [node name="DeleteSaveButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Delete Save"
@@ -75,9 +79,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -220.0
-offset_top = -220.0
+offset_top = -250.0
 offset_right = 220.0
-offset_bottom = 220.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -92,6 +96,7 @@ offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 
 [node name="NewGameLabel" type="Label" parent="NewGamePanel/VBoxContainer"]
 layout_mode = 2
@@ -117,8 +122,9 @@ text = "Select Your State:"
 layout_mode = 2
 
 [node name="StateInfoLabel" type="RichTextLabel" parent="NewGamePanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+size_flags_vertical = 3
 bbcode_enabled = true
 fit_content = true
 
@@ -137,6 +143,66 @@ text = "Back"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Start Game"
+
+[node name="ImportPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ImportPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ImportLabel" type="Label" parent="ImportPanel/VBoxContainer"]
+layout_mode = 2
+text = "Import Farm Configuration"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ImportPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ImportCodeLabel" type="Label" parent="ImportPanel/VBoxContainer"]
+layout_mode = 2
+text = "Enter Import Code:"
+
+[node name="ImportCodeInput" type="TextEdit" parent="ImportPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+placeholder_text = "Paste your import code here..."
+
+[node name="HSeparator2" type="HSeparator" parent="ImportPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ImportButtonContainer" type="HBoxContainer" parent="ImportPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ImportBackButton" type="Button" parent="ImportPanel/VBoxContainer/ImportButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="ImportLoadButton" type="Button" parent="ImportPanel/VBoxContainer/ImportButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Import & Play"
 
 [node name="background_audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_0ykhv")

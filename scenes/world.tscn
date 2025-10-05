@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bve5em3pdxopx" path="res://images/gemini/windmill_smaller.png" id="15_pm21f"]
 [ext_resource type="PackedScene" uid="uid://dfct3bhgs0xll" path="res://scenes/Toolbar.tscn" id="20_2lf6f"]
 [ext_resource type="Texture2D" uid="uid://bidnirtyx53g5" path="res://NDVI.png" id="20_kpybi"]
-[ext_resource type="Script" uid="uid://br33qj8cpgnf8" path="res://scenes/ndvi.gd" id="21_ctatt"]
+[ext_resource type="Script" path="res://scenes/ndvi.gd" id="21_ctatt"]
 [ext_resource type="AudioStream" uid="uid://bh258xvppluy7" path="res://audio/game-music-loop-6-144641.ogg" id="22_oo54l"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_q5onr"]

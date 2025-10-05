@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfct3bhgs0xll"]
+[gd_scene load_steps=21 format=3 uid="uid://dfct3bhgs0xll"]
 
 [ext_resource type="Script" uid="uid://pn364ya2bedm" path="res://canvas_layer.gd" id="1_ek3oe"]
 [ext_resource type="Texture2D" uid="uid://c363ej60y1gt7" path="res://images/WoodMenu.png" id="2_8nnf0"]
@@ -19,6 +19,75 @@ region = Rect2(0.1956501, 144.76807, 15.054174, 14.712952)
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6s7q"]
 atlas = ExtResource("2_mg525")
 region = Rect2(14.898078, 79.37271, 18.020512, 17.678352)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_normal"]
+bg_color = Color(0.2, 0.6, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_hover"]
+bg_color = Color(0.3, 0.7, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_pressed"]
+bg_color = Color(0.1, 0.5, 0.9, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moisture_normal"]
+bg_color = Color(0.6, 0.4, 0.2, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moisture_hover"]
+bg_color = Color(0.7, 0.5, 0.3, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moisture_pressed"]
+bg_color = Color(0.5, 0.3, 0.1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_settings_normal"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_settings_hover"]
+bg_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_settings_pressed"]
+bg_color = Color(0.3, 0.3, 0.3, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_ek3oe")
@@ -63,6 +132,10 @@ offset_left = 353.0
 offset_top = 432.0
 offset_right = 443.0
 offset_bottom = 463.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_buy_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_buy_pressed")
 text = "BUY CORN"
 metadata/_edit_use_anchors_ = true
 
@@ -71,6 +144,8 @@ offset_left = 380.0
 offset_top = 407.0
 offset_right = 418.0
 offset_bottom = 456.0
+theme_override_colors/font_color = Color(0.2, 0.3, 0.1, 1)
+theme_override_font_sizes/font_size = 16
 text = "10"
 script = ExtResource("5_dqqml")
 metadata/_edit_use_anchors_ = true
@@ -80,6 +155,8 @@ offset_left = 7.0
 offset_top = 439.0
 offset_right = 71.0
 offset_bottom = 468.0
+theme_override_colors/font_color = Color(0.1, 0.5, 0.2, 1)
+theme_override_font_sizes/font_size = 18
 text = "10000"
 script = ExtResource("6_j4tml")
 metadata/_edit_use_anchors_ = true
@@ -89,6 +166,8 @@ offset_left = 10.0
 offset_top = 412.0
 offset_right = 74.0
 offset_bottom = 435.0
+theme_override_colors/font_color = Color(0.3, 0.4, 0.2, 1)
+theme_override_font_sizes/font_size = 12
 text = "BUDGET"
 metadata/_edit_use_anchors_ = true
 
@@ -97,6 +176,10 @@ offset_left = 211.0
 offset_top = 432.0
 offset_right = 310.0
 offset_bottom = 463.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_buy_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_buy_pressed")
 text = "BUY WATER"
 metadata/_edit_use_anchors_ = true
 
@@ -105,6 +188,8 @@ offset_left = 254.0
 offset_top = 407.0
 offset_right = 294.0
 offset_bottom = 430.0
+theme_override_colors/font_color = Color(0.1, 0.4, 0.6, 1)
+theme_override_font_sizes/font_size = 16
 text = "10"
 script = ExtResource("7_qv1hn")
 metadata/_edit_use_anchors_ = true
@@ -133,14 +218,63 @@ max_value = 1.0
 offset_top = -6.0
 offset_right = 129.0
 offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.8, 0.6, 0.4, 1)
+theme_override_font_sizes/font_size = 14
 text = "Topsoil Moisture"
+visible = false
 
 [node name="LabelSubSoilMoisture" type="Label" parent="."]
-offset_left = 1.0
-offset_top = -6.0
-offset_right = 130.0
-offset_bottom = 17.0
+offset_left = 3.0
+offset_top = -2.0
+offset_right = 132.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.6, 0.4, 0.3, 1)
+theme_override_font_sizes/font_size = 14
 text = "Subsoil Moisture"
+visible = false
+
+[node name="LabelNDVI" type="Label" parent="."]
+offset_left = 3.0
+offset_top = -2.0
+offset_right = 132.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.4, 0.6, 0.3, 1)
+theme_override_font_sizes/font_size = 14
+text = "NDVI"
+visible = false
+
+[node name="MoistureControls" type="HBoxContainer" parent="."]
+offset_left = 150.0
+offset_top = 5.0
+offset_right = 350.0
+offset_bottom = 35.0
+
+[node name="TopsoilButton" type="Button" parent="MoistureControls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_moisture_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_moisture_pressed")
+text = "Topsoil"
+
+[node name="SubsoilButton" type="Button" parent="MoistureControls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_moisture_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_moisture_pressed")
+text = "Subsoil"
+
+[node name="HideMoistureButton" type="Button" parent="MoistureControls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_moisture_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_moisture_pressed")
+text = "Hide"
 
 [node name="LabelNDVI" type="Label" parent="."]
 offset_left = 37.0
@@ -157,5 +291,140 @@ offset_bottom = 54.0
 rotation = 1.5707964
 texture = ExtResource("8_j4tml")
 
+[node name="SettingsButton" type="Button" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_settings_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_settings_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_settings_pressed")
+text = "⚙"
+
+[node name="SettingsPanel" type="Panel" parent="."]
+visible = false
+offset_left = 60.0
+offset_top = 10.0
+offset_right = 260.0
+offset_bottom = 200.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsLabel" type="Label" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveQuitButton" type="Button" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_buy_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_buy_pressed")
+text = "Save & Quit"
+
+[node name="ExportButton" type="Button" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_moisture_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_moisture_pressed")
+text = "Export Farm"
+
+[node name="ShareButton" type="Button" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_moisture_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_moisture_pressed")
+text = "Share Farm"
+
+[node name="HSeparator2" type="HSeparator" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Close"
+
+[node name="ExportDialog" type="Panel" parent="."]
+visible = false
+offset_left = 100.0
+offset_top = 50.0
+offset_right = 500.0
+offset_bottom = 350.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ExportDialog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExportLabel" type="Label" parent="ExportDialog/VBoxContainer"]
+layout_mode = 2
+text = "Export Farm Code"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ExportDialog/VBoxContainer"]
+layout_mode = 2
+
+[node name="InstructionLabel" type="Label" parent="ExportDialog/VBoxContainer"]
+layout_mode = 2
+text = "Copy this code to share your farm:"
+autowrap_mode = 2
+
+[node name="ExportCodeEdit" type="TextEdit" parent="ExportDialog/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+editable = false
+placeholder_text = "Export code will appear here..."
+
+[node name="ButtonContainer" type="HBoxContainer" parent="ExportDialog/VBoxContainer"]
+layout_mode = 2
+
+[node name="CopyCodeButton" type="Button" parent="ExportDialog/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_buy_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_buy_pressed")
+text = "Copy Code"
+
+[node name="CloseExportButton" type="Button" parent="ExportDialog/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Close"
+
 [connection signal="pressed" from="Button_buy_corn" to="Label_corn" method="_on_button_buy_corn_pressed"]
 [connection signal="pressed" from="Button_buy_water" to="Label_water" method="_on_button_buy_water_pressed"]
+[connection signal="pressed" from="MoistureControls/TopsoilButton" to="." method="_on_topsoil_button_pressed"]
+[connection signal="pressed" from="MoistureControls/SubsoilButton" to="." method="_on_subsoil_button_pressed"]
+[connection signal="pressed" from="MoistureControls/HideMoistureButton" to="." method="_on_hide_moisture_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBoxContainer/SaveQuitButton" to="." method="_on_save_quit_button_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBoxContainer/ExportButton" to="." method="_on_export_button_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBoxContainer/ShareButton" to="." method="_on_share_button_pressed"]
+[connection signal="pressed" from="SettingsPanel/VBoxContainer/CloseButton" to="." method="_on_close_settings_button_pressed"]
+[connection signal="pressed" from="ExportDialog/VBoxContainer/ButtonContainer/CopyCodeButton" to="." method="_on_copy_code_button_pressed"]
+[connection signal="pressed" from="ExportDialog/VBoxContainer/ButtonContainer/CloseExportButton" to="." method="_on_close_export_button_pressed"]

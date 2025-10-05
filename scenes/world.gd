@@ -29,6 +29,9 @@ var crop : Dictionary
 var auto_save_timer : Timer
 
 func _ready():
+	# Add this scene to the "world" group so the toolbar can access it
+	add_to_group("world")
+	
 	Global.set_world_scene_reference(self)
 	
 	load_world_state()
@@ -197,7 +200,7 @@ func set_tile(tile_name: String, cell_pos: Vector2i, layer: TileMapLayer, coord:
 	if block.has(tile_name):
 		layer.set_cell(cell_pos, block[tile_name].source_id, block[tile_name].atlas_coords[coord])
 
-func watering_tile(tile_name: String, pos: Vector2i, amount: float = 1.0):
+func watering_tile(tile_name: String, pos: Vector2i, _amount: float = 1.0):
 	
 	if not Global.water_level.has(pos):
 		return
