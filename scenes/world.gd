@@ -158,7 +158,7 @@ func plant_crop(tile_pos: Vector2i) -> bool:
 	"""Plant a crop and track the action"""
 	if Global.crops.has(Global.current_tool) and Global.crops[Global.current_tool] > 0:
 		if not Global.can_plant_crop(Global.current_tool):
-			return
+			return false
 		
 		set_tile(Global.current_tool, tile_pos, crop_layer)
 		crop[tile_pos] = { "name" : Global.current_tool, "duration" : 0 }
@@ -166,6 +166,9 @@ func plant_crop(tile_pos: Vector2i) -> bool:
 		Global.track_crop_planted()
 		
 		Global.save_game()
+		return true
+	else:
+		return false
 
 func get_snapped_position(global_pos: Vector2) -> Vector2i:
 	var local_pos = crop_layer.to_local(global_pos)
