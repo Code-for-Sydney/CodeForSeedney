@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://ckavqb25bdaul"]
+[gd_scene load_steps=42 format=4 uid="uid://ckavqb25bdaul"]
 
 [ext_resource type="Script" uid="uid://cp56cckuuw614" path="res://scenes/world.gd" id="1_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://dws66rxf30rf3" path="res://ground.png" id="1_rwgxs"]
@@ -7,20 +7,17 @@
 [ext_resource type="Resource" uid="uid://bxdnmj8c5hbma" path="res://resources/wheat.tres" id="4_qfnet"]
 [ext_resource type="Resource" uid="uid://crd0nvvcv8rgo" path="res://resources/corn.tres" id="5_w7kh3"]
 [ext_resource type="Texture2D" uid="uid://t075q4rxwqi3" path="res://crop.png" id="6_7r4gi"]
-
-[ext_resource type="Script" uid="uid://nrbm8pniuh27" path="res://scripts/label_corn.gd" id="7_i7141"]
+[ext_resource type="Resource" uid="uid://dq5ra5il7t25i" path="res://resources/moisture.tres" id="6_lakw3"]
 [ext_resource type="Texture2D" uid="uid://cy0amo7r6e4tt" path="res://images/submission_daneeklu/tilesets/plowed_soil.png" id="7_q5onr"]
 [ext_resource type="Texture2D" uid="uid://by5ghkld6on7l" path="res://images/opengameart_josehzz/Crop_Spritesheet.png" id="8_e3hyu"]
 [ext_resource type="Texture2D" uid="uid://i47akvr1uc8y" path="res://images/mask.png" id="8_o8fc1"]
-[ext_resource type="Texture2D" uid="uid://bv315u41u6m75" path="res://images/liberated_pixel_cup/grass.png" id="8_pm21f"]
-[ext_resource type="Script" uid="uid://b3entvyot8e86" path="res://scenes/label_water.gd" id="9_7r4gi"]
 [ext_resource type="Texture2D" uid="uid://3m84kt6awftq" path="res://images/liberated_pixel_cup/grass.png" id="8_pm21f"]
 [ext_resource type="Texture2D" uid="uid://20oaravm18tl" path="res://moisture.png" id="9_q5onr"]
 [ext_resource type="Texture2D" uid="uid://d4kmeto3tjilm" path="res://images/gemini/farmhouse_smaller.png" id="11_xo05s"]
 [ext_resource type="Texture2D" uid="uid://bdagvdb4sad4w" path="res://images/gemini/barn_small.png" id="13_pm21f"]
 [ext_resource type="Texture2D" uid="uid://b5dfj1n660muh" path="res://images/gemini/garden_smaller.png" id="14_2lf6f"]
 [ext_resource type="Texture2D" uid="uid://bve5em3pdxopx" path="res://images/gemini/windmill_smaller.png" id="15_pm21f"]
-[ext_resource type="PackedScene" path="res://scenes/Toolbar.tscn" id="20_2lf6f"]
+[ext_resource type="PackedScene" uid="uid://dfct3bhgs0xll" path="res://scenes/Toolbar.tscn" id="20_2lf6f"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_q5onr"]
 tile_data = PackedInt32Array(0, 2, 2, 65536, 2, 3, 131072, 2, 3, 196608, 2, 3, 262144, 2, 3, 327680, 2, 3, 393216, 2, 3, 458752, 2, 4, 1, 65538, 2, 65537, 65538, 3, 131073, 65538, 3, 196609, 65538, 3, 262145, 65538, 3, 327681, 65538, 3, 393217, 65538, 3, 458753, 65538, 4, 2, 65538, 2, 65538, 65538, 3, 131074, 65538, 3, 196610, 65538, 3, 262146, 65538, 3, 327682, 65538, 3, 393218, 65538, 3, 458754, 65538, 4, 3, 65538, 2, 65539, 65538, 3, 131075, 65538, 3, 196611, 65538, 3, 262147, 65538, 3, 327683, 65538, 3, 393219, 65538, 3, 458755, 65538, 4, 4, 65538, 2, 65540, 65538, 3, 131076, 65538, 3, 196612, 65538, 3, 262148, 65538, 3, 327684, 65538, 3, 393220, 65538, 3, 458756, 65538, 4, 5, 65538, 2, 65541, 65538, 3, 131077, 65538, 3, 196613, 65538, 3, 262149, 65538, 3, 327685, 65538, 3, 393221, 65538, 3, 458757, 65538, 4, 6, 65538, 2, 65542, 65538, 3, 131078, 65538, 3, 196614, 65538, 3, 262150, 65538, 3, 327686, 65538, 3, 393222, 65538, 3, 458758, 65538, 4, 7, 131074, 2, 65543, 131074, 3, 131079, 131074, 3, 196615, 131074, 3, 262151, 131074, 3, 327687, 131074, 3, 393223, 131074, 3, 458759, 131074, 4)
@@ -435,6 +432,7 @@ func _ready() -> void:
 script = ExtResource("1_4wyf3")
 block = Dictionary[String, ExtResource("2_71j4m")]({
 "corn": ExtResource("5_w7kh3"),
+"moisture": ExtResource("6_lakw3"),
 "soil": ExtResource("3_qfnet"),
 "wheat": ExtResource("4_qfnet")
 })

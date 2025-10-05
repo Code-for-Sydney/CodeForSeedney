@@ -14,6 +14,8 @@ extends Node2D
 #@onready var time_label = $SeasonTimer/TimeLabel
 #@onready var progress_bar = $SeasonTimer/ProgressBar
 
+var water_to_block = {5:0,10:1,15:2,20:3,25:4,30:5,35:6,40:7}
+
 var crop : Dictionary
 @export var block : Dictionary[String, BlockData]
 
@@ -166,19 +168,14 @@ func set_tile(tile_name: String, cell_pos: Vector2i, layer: TileMapLayer, coord:
 		layer.set_cell(cell_pos, block[tile_name].source_id, block[tile_name].atlas_coords[coord])
 
 func watering_tile(tile_name: String, pos: Vector2i, amount: float = 1.0):
-	print("watering", Global.water_level[pos])
-	print("source count", topsoil.tile_set.get_source(1).get_tile_id(0))
-	print("source count", topsoil.tile_set.get_source(1).get_tile_id(1))
-	print("source count", topsoil.tile_set.get_source(1).get_tile_id(2))
-	print("source count", topsoil.tile_set.get_source(1).get_tile_id(3))
-	#print(topsoil.tile_set.find_tile_by_source(1, "(1, 0)"))
+	
 	if not Global.water_level.has(pos):
 		print("No tile data found at position: ", pos)
 		return
-	if  Global.water_level[pos] < 0.4:
+	if  Global.water_level[pos] < 0.39:
 		Global.water_level[pos] += 0.05
-	print("watered", Global.water_level[pos])
-	topsoil.set_cell(pos, 7)
+	
+	$SoilMoisture.set_cell(pos, block["moisture"].source_id, block["moisture"].atlas_coords[water_to_block[int(Global.water_level[pos]*100)]])
 
 func drying_tile(pos):
 	var tile_pos = get_snapped_position(pos)
