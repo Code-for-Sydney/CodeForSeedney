@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy5uni3pa20fj"
-path="res://.godot/imported/blue_haired_woman.png-524deab6a532acf5528d629c0daab58b.ctex"
+uid="uid://ba6wb0jxeplsh"
+path="res://.godot/imported/windmill.png-e817cc30fdd779ef6aa4faf2f80034e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/RPG Top Down Character Asset Pack - FREE/RPG Top Down Characters - Free Version/Blue Haired Woman/blue_haired_woman.png"
-dest_files=["res://.godot/imported/blue_haired_woman.png-524deab6a532acf5528d629c0daab58b.ctex"]
+source_file="res://images/gemini/windmill.png"
+dest_files=["res://.godot/imported/windmill.png-e817cc30fdd779ef6aa4faf2f80034e1.ctex"]
 
 [params]
 

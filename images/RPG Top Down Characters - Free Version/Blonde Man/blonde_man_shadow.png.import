@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://csxyf7x7q6yur"
-path="res://.godot/imported/blonde_man_shadow.png-0ecf1fa69b1fbaf8d655bea5b9b4e282.ctex"
+path="res://.godot/imported/blonde_man_shadow.png-188320d5e88a7f64b3160bc789fa75b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/RPG Top Down Character Asset Pack - FREE/RPG Top Down Characters - Free Version/Blonde Man/blonde_man_shadow.png"
-dest_files=["res://.godot/imported/blonde_man_shadow.png-0ecf1fa69b1fbaf8d655bea5b9b4e282.ctex"]
+source_file="res://images/RPG Top Down Characters - Free Version/Blonde Man/blonde_man_shadow.png"
+dest_files=["res://.godot/imported/blonde_man_shadow.png-188320d5e88a7f64b3160bc789fa75b5.ctex"]
 
 [params]
 
