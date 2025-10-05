@@ -107,9 +107,11 @@ func _physics_process(delta: float) -> void:
 
 func _input(event):
 	if event.is_action_pressed("toggle_SMAPTop"):
+		$SubSoilMoisture.visible = false
 		$SoilMoisture.visible = !$SoilMoisture.visible
 		
 	if event.is_action_pressed("toggle_Subsoil"):
+		$SoilMoisture.visible = false
 		$SubSoilMoisture.visible = !$SubSoilMoisture.visible
 		
 	if event is InputEventMouseButton and event.is_pressed():
