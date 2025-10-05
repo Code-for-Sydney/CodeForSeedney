@@ -144,8 +144,17 @@ func _input(event):
 				
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			plant_crop(tile_pos)
+			
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			var planted = plant_crop(tile_pos)
+			if planted:
+				$Crops/plant_audio.pitch_scale = randf_range(0.9, 1.1)
+				$Crops/plant_audio.play()
+			else:
+				$Crops/unplant_audio.pitch_scale = randf_range(0.9, 1.1)
+				$Crops/unplant_audio.play()
 
-func plant_crop(tile_pos: Vector2i):
+func plant_crop(tile_pos: Vector2i) -> bool:
 	"""Plant a crop and track the action"""
 	if Global.crops.has(Global.current_tool) and Global.crops[Global.current_tool] > 0:
 		if not Global.can_plant_crop(Global.current_tool):

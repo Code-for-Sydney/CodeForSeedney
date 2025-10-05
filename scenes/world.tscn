@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://ckavqb25bdaul"]
+[gd_scene load_steps=44 format=4 uid="uid://ckavqb25bdaul"]
 
 [ext_resource type="Script" uid="uid://cp56cckuuw614" path="res://scenes/world.gd" id="1_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://dws66rxf30rf3" path="res://ground.png" id="1_rwgxs"]
@@ -14,8 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://3m84kt6awftq" path="res://images/liberated_pixel_cup/grass.png" id="8_pm21f"]
 [ext_resource type="Texture2D" uid="uid://20oaravm18tl" path="res://moisture.png" id="9_q5onr"]
 [ext_resource type="Texture2D" uid="uid://d4kmeto3tjilm" path="res://images/gemini/farmhouse_smaller.png" id="11_xo05s"]
+[ext_resource type="AudioStream" uid="uid://cney2qpuiqxkm" path="res://audio/plant_audio.ogg" id="13_2lf6f"]
 [ext_resource type="Texture2D" uid="uid://bdagvdb4sad4w" path="res://images/gemini/barn_small.png" id="13_pm21f"]
 [ext_resource type="Texture2D" uid="uid://b5dfj1n660muh" path="res://images/gemini/garden_smaller.png" id="14_2lf6f"]
+[ext_resource type="AudioStream" uid="uid://j2bvbiywiml0" path="res://audio/unplant_audio.ogg" id="14_7iits"]
 [ext_resource type="Texture2D" uid="uid://bve5em3pdxopx" path="res://images/gemini/windmill_smaller.png" id="15_pm21f"]
 [ext_resource type="PackedScene" uid="uid://dfct3bhgs0xll" path="res://scenes/Toolbar.tscn" id="20_2lf6f"]
 
@@ -453,6 +455,12 @@ tile_set = SubResource("TileSet_dss4m")
 
 [node name="Crops" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_e3hyu")
+
+[node name="plant_audio" type="AudioStreamPlayer2D" parent="Crops"]
+stream = ExtResource("13_2lf6f")
+
+[node name="unplant_audio" type="AudioStreamPlayer2D" parent="Crops"]
+stream = ExtResource("14_7iits")
 
 [node name="Vehicles" type="TileMapLayer" parent="."]
 visible = false

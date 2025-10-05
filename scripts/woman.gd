@@ -40,10 +40,10 @@ func update_state():
 	if(velocity != Vector2.ZERO):
 		state_machine.travel("Walk")
 		if not is_walking:
-			$walk.play()
+			$walk_audio.play()
 			is_walking = true
 	else:
 		state_machine.travel("Idle")
 		if is_walking:
-			$walk.stop()
+			$walk_audio.stop()
 			is_walking = false
