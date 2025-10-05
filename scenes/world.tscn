@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://ckavqb25bdaul"]
+[gd_scene load_steps=40 format=4 uid="uid://ckavqb25bdaul"]
 
 [ext_resource type="Script" uid="uid://cp56cckuuw614" path="res://scenes/world.gd" id="1_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://dws66rxf30rf3" path="res://ground.png" id="1_rwgxs"]
@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://dk0qrlexbt8vi" path="res://scripts/label_budget.gd" id="8_4mrxx"]
 [ext_resource type="Texture2D" uid="uid://by5ghkld6on7l" path="res://images/opengameart_josehzz/Crop_Spritesheet.png" id="8_e3hyu"]
 [ext_resource type="Texture2D" uid="uid://i47akvr1uc8y" path="res://images/mask.png" id="8_o8fc1"]
-[ext_resource type="Texture2D" uid="uid://b6sayvg345o8p" path="res://images/liberated_pixel_cup/grass.png" id="8_pm21f"]
+[ext_resource type="Texture2D" uid="uid://3m84kt6awftq" path="res://images/liberated_pixel_cup/grass.png" id="8_pm21f"]
 [ext_resource type="Script" uid="uid://b3entvyot8e86" path="res://scenes/label_water.gd" id="9_7r4gi"]
 [ext_resource type="Texture2D" uid="uid://20oaravm18tl" path="res://moisture.png" id="9_q5onr"]
 [ext_resource type="Texture2D" uid="uid://d4kmeto3tjilm" path="res://images/gemini/farmhouse_smaller.png" id="11_xo05s"]
@@ -314,6 +314,10 @@ sources/3 = SubResource("TileSetAtlasSource_oo54l")
 sources/4 = SubResource("TileSetAtlasSource_kpybi")
 sources/5 = SubResource("TileSetAtlasSource_2lf6f")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pm21f"]
+radius = 4.4982376
+height = 17.289566
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jhx03"]
 texture = ExtResource("9_q5onr")
 0:0/0 = 0
@@ -373,6 +377,21 @@ modulate = Color(0.82759273, 0.82759273, 0.82759273, 1)
 z_index = 2
 tile_map_data = PackedByteArray("AAARAAkAAgAAAAAAAAAWAAkAAwAAAAAAAAARAAwABAAAAAAAAAAWAA0ABQAAAAAAAAA=")
 tile_set = SubResource("TileSet_7t5mc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Buildings"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Buildings/StaticBody2D"]
+position = Vector2(-3.9346924, 2.841835)
+scale = Vector2(1.0159882, 0.97554356)
+polygon = PackedVector2Array(259.78125, 136.49638, 257.8127, 177.49916, 302.10458, 176.47409, 299, 136)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Buildings/StaticBody2D"]
+polygon = PackedVector2Array(257, 187, 257, 216, 305, 216, 305, 187)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/StaticBody2D"]
+position = Vector2(360, 160)
+scale = Vector2(6.0023475, -1.9665046)
+shape = SubResource("CapsuleShape2D_pm21f")
 
 [node name="Weather" type="TileMapLayer" parent="."]
 visible = false
