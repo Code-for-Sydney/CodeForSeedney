@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var ground = $Ground
+@onready var ground_mask = $GroundMask
 @onready var crop_layer = $Crops
 @onready var woman_scene = preload("res://scenes/woman.tscn")
 
@@ -106,11 +107,16 @@ func _physics_process(delta: float) -> void:
 
 func _input(event):
 	if event.is_action_pressed("toggle_SMAPTop"):
-		print("hello")
 		$SoilMoisture.visible = !$SoilMoisture.visible
 		
 	if event is InputEventMouseButton and event.is_pressed():
 		var tile_pos = get_snapped_position(get_global_mouse_position())
+		
+		var mask_data = ground_mask.get_cell_tile_data(tile_pos)
+		if mask_data:
+			var mask_name = mask_data.get_custom_data("mask_type")
+			if mask_name == "no_crops":
+				return
 		
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			var data = ground.get_cell_tile_data(tile_pos)

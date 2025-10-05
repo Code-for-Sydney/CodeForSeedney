@@ -21,10 +21,10 @@ Global="*res://scripts/global.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=850
-window/size/window_width_override=1280
-window/size/window_height_override=850
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/size/window_width_override=640
+window/size/window_height_override=480
 
 [input]
 
