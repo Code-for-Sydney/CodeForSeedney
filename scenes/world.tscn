@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://bxdnmj8c5hbma" path="res://resources/wheat.tres" id="4_qfnet"]
 [ext_resource type="Resource" uid="uid://crd0nvvcv8rgo" path="res://resources/corn.tres" id="5_w7kh3"]
 [ext_resource type="Texture2D" uid="uid://t075q4rxwqi3" path="res://crop.png" id="6_7r4gi"]
-[ext_resource type="Texture2D" uid="uid://c3r7xhylnmug4" path="res://images/submission_daneeklu/tilesets/plowed_soil_inactive.png" id="7_7iits"]
+
 [ext_resource type="Script" uid="uid://nrbm8pniuh27" path="res://scripts/label_corn.gd" id="7_i7141"]
 [ext_resource type="Texture2D" uid="uid://cy0amo7r6e4tt" path="res://images/submission_daneeklu/tilesets/plowed_soil.png" id="7_q5onr"]
 [ext_resource type="Texture2D" uid="uid://by5ghkld6on7l" path="res://images/opengameart_josehzz/Crop_Spritesheet.png" id="8_e3hyu"]
@@ -39,7 +39,6 @@ texture = ExtResource("1_rwgxs")
 1:0/0/custom_data_0 = "soil"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ctatt"]
-texture = ExtResource("7_7iits")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0

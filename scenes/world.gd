@@ -171,7 +171,7 @@ func watering_tile(tile_name: String, pos: Vector2i, amount: float = 1.0):
 	print("source count", topsoil.tile_set.get_source(1).get_tile_id(1))
 	print("source count", topsoil.tile_set.get_source(1).get_tile_id(2))
 	print("source count", topsoil.tile_set.get_source(1).get_tile_id(3))
-	print(topsoil.tile_set.find_tile_by_source(1, "(1, 0)"))
+	#print(topsoil.tile_set.find_tile_by_source(1, "(1, 0)"))
 	if not Global.water_level.has(pos):
 		print("No tile data found at position: ", pos)
 		return
