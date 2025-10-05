@@ -14,7 +14,9 @@ extends Node2D
 #@onready var time_label = $SeasonTimer/TimeLabel
 #@onready var progress_bar = $SeasonTimer/ProgressBar
 
-var water_to_block = {5:0,10:1,15:2,20:3,25:4,30:5,35:6,40:7}
+var physics_timer = 0
+#Key 4 shouldn't be accessible, but something keeps trying to access it, so it is needed.
+var water_to_block = {0:0,4:1,5:1,10:2,15:3,20:4,25:5,30:6,35:7}
 
 var crop : Dictionary
 @export var block : Dictionary[String, BlockData]
@@ -91,13 +93,15 @@ func _unhandled_input(event):
 func _physics_process(delta: float) -> void:
 	# Update timer UI
 	update_timer_ui()
+	physics_timer += delta
 	
-	"""for pos in water_level:
-		water_level[pos] -= delta
-		if water_level[pos] <= 0:
-			water_level.erase(pos)
-			drying_tile(pos)"""
-			
+	if physics_timer > 5:
+		for pos in Global.water_level:
+			if Global.water_level[pos] > 0:
+				Global.water_level[pos] -= 0.05
+				$SoilMoisture.set_cell(pos, block["moisture"].source_id, block["moisture"].atlas_coords[water_to_block[int(Global.water_level[pos]*100)]])
+		physics_timer = 0
+		
 	for pos in crop:
 		if Global.water_level.has(pos):
 			crop[pos]["duration"] += delta
@@ -172,7 +176,7 @@ func watering_tile(tile_name: String, pos: Vector2i, amount: float = 1.0):
 	if not Global.water_level.has(pos):
 		print("No tile data found at position: ", pos)
 		return
-	if  Global.water_level[pos] < 0.39:
+	if  Global.water_level[pos] < 0.34:
 		Global.water_level[pos] += 0.05
 	
 	$SoilMoisture.set_cell(pos, block["moisture"].source_id, block["moisture"].atlas_coords[water_to_block[int(Global.water_level[pos]*100)]])
