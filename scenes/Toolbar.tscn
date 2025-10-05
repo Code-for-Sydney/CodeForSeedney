@@ -29,15 +29,6 @@ corner_radius_bottom_left = 4
 shadow_color = Color(0, 0, 0, 0.3)
 shadow_size = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_hover"]
-bg_color = Color(0.3, 0.7, 1, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-shadow_color = Color(0, 0, 0, 0.4)
-shadow_size = 3
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_pressed"]
 bg_color = Color(0.1, 0.5, 0.9, 1)
 corner_radius_top_left = 4
@@ -47,15 +38,17 @@ corner_radius_bottom_left = 4
 shadow_color = Color(0, 0, 0, 0.2)
 shadow_size = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_hover"]
+bg_color = Color(0.3, 0.7, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 3
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moisture_normal"]
 bg_color = Color(0.6, 0.4, 0.2, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moisture_hover"]
-bg_color = Color(0.7, 0.5, 0.3, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -68,6 +61,13 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moisture_hover"]
+bg_color = Color(0.7, 0.5, 0.3, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_settings_normal"]
 bg_color = Color(0.4, 0.4, 0.4, 1)
 corner_radius_top_left = 6
@@ -75,15 +75,15 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_settings_hover"]
-bg_color = Color(0.5, 0.5, 0.5, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_settings_pressed"]
+bg_color = Color(0.3, 0.3, 0.3, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_settings_pressed"]
-bg_color = Color(0.3, 0.3, 0.3, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_settings_hover"]
+bg_color = Color(0.5, 0.5, 0.5, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -134,8 +134,8 @@ offset_right = 443.0
 offset_bottom = 463.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_buy_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_buy_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
 text = "BUY CORN"
 metadata/_edit_use_anchors_ = true
 
@@ -178,8 +178,8 @@ offset_right = 310.0
 offset_bottom = 463.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_buy_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_buy_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
 text = "BUY WATER"
 metadata/_edit_use_anchors_ = true
 
@@ -215,15 +215,16 @@ layout_mode = 2
 max_value = 1.0
 
 [node name="LabelSoilMoisture" type="Label" parent="."]
+visible = false
 offset_top = -6.0
 offset_right = 129.0
 offset_bottom = 17.0
 theme_override_colors/font_color = Color(0.8, 0.6, 0.4, 1)
 theme_override_font_sizes/font_size = 14
 text = "Topsoil Moisture"
-visible = false
 
 [node name="LabelSubSoilMoisture" type="Label" parent="."]
+visible = false
 offset_left = 3.0
 offset_top = -2.0
 offset_right = 132.0
@@ -231,9 +232,9 @@ offset_bottom = 21.0
 theme_override_colors/font_color = Color(0.6, 0.4, 0.3, 1)
 theme_override_font_sizes/font_size = 14
 text = "Subsoil Moisture"
-visible = false
 
-[node name="LabelNDVI" type="Label" parent="."]
+[node name="LabelNDVIx" type="Label" parent="."]
+visible = false
 offset_left = 3.0
 offset_top = -2.0
 offset_right = 132.0
@@ -241,7 +242,6 @@ offset_bottom = 21.0
 theme_override_colors/font_color = Color(0.4, 0.6, 0.3, 1)
 theme_override_font_sizes/font_size = 14
 text = "NDVI"
-visible = false
 
 [node name="MoistureControls" type="HBoxContainer" parent="."]
 offset_left = 150.0
@@ -254,8 +254,8 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_moisture_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_moisture_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
 text = "Topsoil"
 
 [node name="SubsoilButton" type="Button" parent="MoistureControls"]
@@ -263,8 +263,8 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_moisture_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_moisture_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
 text = "Subsoil"
 
 [node name="HideMoistureButton" type="Button" parent="MoistureControls"]
@@ -272,11 +272,11 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_moisture_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_moisture_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
 text = "Hide"
 
-[node name="LabelNDVI" type="Label" parent="."]
+[node name="LabelNDVI2" type="Label" parent="."]
 offset_left = 37.0
 offset_top = -6.0
 offset_right = 166.0
@@ -299,8 +299,8 @@ offset_bottom = 40.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_settings_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_settings_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_settings_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_settings_hover")
 text = "⚙"
 
 [node name="SettingsPanel" type="Panel" parent="."]
@@ -334,24 +334,24 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_buy_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_buy_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
 text = "Save & Quit"
 
 [node name="ExportButton" type="Button" parent="SettingsPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_moisture_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_moisture_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
 text = "Export Farm"
 
 [node name="ShareButton" type="Button" parent="SettingsPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_moisture_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_moisture_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_moisture_hover")
 text = "Share Farm"
 
 [node name="HSeparator2" type="HSeparator" parent="SettingsPanel/VBoxContainer"]
@@ -396,8 +396,8 @@ autowrap_mode = 2
 [node name="ExportCodeEdit" type="TextEdit" parent="ExportDialog/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-editable = false
 placeholder_text = "Export code will appear here..."
+editable = false
 
 [node name="ButtonContainer" type="HBoxContainer" parent="ExportDialog/VBoxContainer"]
 layout_mode = 2
@@ -407,8 +407,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_buy_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_buy_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
 text = "Copy Code"
 
 [node name="CloseExportButton" type="Button" parent="ExportDialog/VBoxContainer/ButtonContainer"]
