@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bb4rtgff41pk0"
-path="res://.godot/imported/blue_haired_woman_shadow.png-ac2a7f92af15071f4d620e0bb498de9a.ctex"
+path="res://.godot/imported/blue_haired_woman_shadow.png-1b5e7321d14b6cfc2abf3bebd17b83f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/RPG Top Down Character Asset Pack - FREE/RPG Top Down Characters - Free Version/Blue Haired Woman/blue_haired_woman_shadow.png"
-dest_files=["res://.godot/imported/blue_haired_woman_shadow.png-ac2a7f92af15071f4d620e0bb498de9a.ctex"]
+source_file="res://images/RPG Top Down Characters - Free Version/Blue Haired Woman/blue_haired_woman_shadow.png"
+dest_files=["res://.godot/imported/blue_haired_woman_shadow.png-1b5e7321d14b6cfc2abf3bebd17b83f8.ctex"]
 
 [params]
 

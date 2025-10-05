@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbkr74yqs8j31"
-path="res://.godot/imported/blonde_man.png-cf7eec637385109466798be7d3c9030c.ctex"
+uid="uid://cy5uni3pa20fj"
+path="res://.godot/imported/blue_haired_woman.png-f9e52ebf49bfd4bfb65ece9000837525.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/RPG Top Down Character Asset Pack - FREE/RPG Top Down Characters - Free Version/Blonde Man/blonde_man.png"
-dest_files=["res://.godot/imported/blonde_man.png-cf7eec637385109466798be7d3c9030c.ctex"]
+source_file="res://images/RPG Top Down Characters - Free Version/Blue Haired Woman/blue_haired_woman.png"
+dest_files=["res://.godot/imported/blue_haired_woman.png-f9e52ebf49bfd4bfb65ece9000837525.ctex"]
 
 [params]
 

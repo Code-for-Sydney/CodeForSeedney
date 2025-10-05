@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cv4osgjycgmn1"
-path="res://.godot/imported/farm_red.png-7f64d8ba29c9b642687b208ca2a513bb.ctex"
+uid="uid://bn7wrcn8eb0sc"
+path="res://.godot/imported/blade-small.png-2f52a9a40423435b9b656e8efde13934.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/gemini/farm_red.png"
-dest_files=["res://.godot/imported/farm_red.png-7f64d8ba29c9b642687b208ca2a513bb.ctex"]
+source_file="res://images/lpc-farm/blade-small.png"
+dest_files=["res://.godot/imported/blade-small.png-2f52a9a40423435b9b656e8efde13934.ctex"]
 
 [params]
 
