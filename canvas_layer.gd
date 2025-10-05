@@ -1,4 +1,6 @@
-extends Control
+extends CanvasLayer
+
+
 
 @onready var wheat_cursor =preload("res://images/opengameart_josehzz/WheatCursor.tres")
 @onready var corn_cursor = preload("res://images/opengameart_josehzz/CornCursor.tres")
@@ -18,13 +20,13 @@ func _ready():
 	add_child(cursor_sprite)
 
 	# Connect toolbar buttons
-	$VBoxContainer/WheatButton.pressed.connect(func(): set_cursor("wheat"))
-	$VBoxContainer/CornButton.pressed.connect(func(): set_cursor("corn"))
-	$VBoxContainer/WaterJugButton.pressed.connect(func(): set_cursor("water"))
+	$PanelContainer/VBoxContainer/WheatButton.pressed.connect(func(): set_cursor("wheat"))
+	$PanelContainer/VBoxContainer/CornButton.pressed.connect(func(): set_cursor("corn"))
+	$PanelContainer/VBoxContainer/WaterJugButton.pressed.connect(func(): set_cursor("water"))
 
 func _process(delta):
 	# Make the cursor follow the mouse
-	cursor_sprite.global_position = get_global_mouse_position()
+	cursor_sprite.global_position = get_viewport().get_mouse_position()
 
 func set_cursor(tool_name: String):
 	match tool_name:
