@@ -6,10 +6,13 @@ extends Node2D
 @onready var topsoil = $SoilMoisture
 @onready var subsoil = $SubSoilMoisture
 @onready var woman_scene = preload("res://scenes/woman.tscn")
-
-@onready var season_label = $SeasonTimer/SeasonLabel
-@onready var time_label = $SeasonTimer/TimeLabel
-@onready var progress_bar = $SeasonTimer/ProgressBar
+@onready var toolbar = $ToolbarInstance
+@onready var season_label = toolbar.get_node("SeasonTimer/SeasonLabel")
+@onready var time_label = toolbar.get_node("SeasonTimer/TimeLabel")
+@onready var progress_bar = toolbar.get_node("SeasonTimer/ProgressBar")
+#@onready var season_label = $SeasonTimer/SeasonLabel
+#@onready var time_label = $SeasonTimer/TimeLabel
+#@onready var progress_bar = $SeasonTimer/ProgressBar
 
 var crop : Dictionary
 @export var block : Dictionary[String, BlockData]
