@@ -29,7 +29,6 @@ func _ready():
 	load_world_state()
 	
 	if not Global.has_save_file() and Global.player_name == "":
-		print("No save file found and no player data - creating default save")
 		Global.start_new_game("Player", "Kansas")
 	
 	auto_save_timer = Timer.new()
@@ -71,7 +70,6 @@ func load_world_state():
 				set_tile(crop_name, pos, crop_layer, growth_index)
 		
 		Global.current_world_scene = null
-		print("World state loaded successfully")
 
 func get_world_state() -> Dictionary:
 	"""Return current world state for saving"""
@@ -151,7 +149,6 @@ func plant_crop(tile_pos: Vector2i):
 	"""Plant a crop and track the action"""
 	if Global.crops.has(Global.current_tool) and Global.crops[Global.current_tool] > 0:
 		if not Global.can_plant_crop(Global.current_tool):
-			print("Cannot plant ", Global.current_tool, " in current season: ", Global.get_current_season_name())
 			return
 		
 		set_tile(Global.current_tool, tile_pos, crop_layer)
@@ -160,7 +157,6 @@ func plant_crop(tile_pos: Vector2i):
 		Global.track_crop_planted()
 		
 		Global.save_game()
-		print("Planted ", Global.current_tool, " at ", tile_pos)
 
 func get_snapped_position(global_pos: Vector2) -> Vector2i:
 	var local_pos = crop_layer.to_local(global_pos)
@@ -174,7 +170,6 @@ func set_tile(tile_name: String, cell_pos: Vector2i, layer: TileMapLayer, coord:
 func watering_tile(tile_name: String, pos: Vector2i, amount: float = 1.0):
 	
 	if not Global.water_level.has(pos):
-		print("No tile data found at position: ", pos)
 		return
 	if  Global.water_level[pos] < 0.34:
 		Global.water_level[pos] += 0.05
@@ -192,7 +187,6 @@ func harvesting(pos) -> bool:
 		var money_gained = 100
 		Global.budget += money_gained
 		Global.track_crop_harvested(money_gained)
-		print("Harvested crop at ", pos, " for $", money_gained)
 		return true
 	return false
 
