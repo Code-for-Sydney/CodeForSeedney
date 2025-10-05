@@ -16,7 +16,7 @@ func _ready():
 	var world = get_parent()  # World is the parent
 	world.connect("toggle_topsoil_label_requested", Callable(self, "toggle_topsoil_label"))
 	world.connect("toggle_subsoil_label_requested", Callable(self, "toggle_subsoil_label"))
-	world.connect("toggle_ndvi_label_requested", Callable(self, "toggle_subsoil_label"))
+	world.connect("toggle_ndvi_label_requested", Callable(self, "toggle_ndvi_label"))
 	#labels shold be hidden initially
 	topsoil_label.visible=false
 	subsoil_label.visible=false
@@ -51,21 +51,22 @@ func set_cursor(tool_name: String):
 		"water":
 			cursor_sprite.scale = Vector2(0.7,0.7)
 			cursor_sprite.texture = waterjug_cursor
+
 func toggle_topsoil_label(state: bool):
 	topsoil_label.visible = state
-	if topsoil_label.visible==true:
+	if state==true:
 		subsoil_label.visible=false
 		ndvi_label.visible=false
 
 func toggle_subsoil_label(state: bool):
 	subsoil_label.visible = state
-	if subsoil_label.visible==true:
+	if state==true:
 		topsoil_label.visible=false
 		ndvi_label.visible=false
 		
 func toggle_ndvi_label(state: bool):
 	ndvi_label.visible = state
-	if ndvi_label.visible==true:
+	if state==true:
 		topsoil_label.visible=false
 		subsoil_label.visible=false
 	
