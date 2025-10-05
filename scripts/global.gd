@@ -404,5 +404,3 @@ func initialize_water_level(layer):
 		var topsoil_data = layer.get_cell_tile_data(cell_pos)
 		var topsoil_waterlevel = topsoil_data.get_custom_data("water_level")
 		water_level[Vector2i(cell_pos)] = topsoil_waterlevel
-	print("initializedd")
-	print(water_level)
