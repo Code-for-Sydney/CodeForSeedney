@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var waterjug_cursor = preload("res://images/WaterJug.png")
 @onready var topsoil_label = $LabelSoilMoisture
 @onready var subsoil_label = $LabelSubSoilMoisture
+@onready var ndvi_label = $LabelNDVI
 
 var cursor_sprite: Sprite2D
 
@@ -15,6 +16,11 @@ func _ready():
 	var world = get_parent()  # World is the parent
 	world.connect("toggle_topsoil_label_requested", Callable(self, "toggle_topsoil_label"))
 	world.connect("toggle_subsoil_label_requested", Callable(self, "toggle_subsoil_label"))
+	world.connect("toggle_ndvi_label_requested", Callable(self, "toggle_subsoil_label"))
+	#labels shold be hidden initially
+	topsoil_label.visible=false
+	subsoil_label.visible=false
+	ndvi_label.visible=false
 	# Hide the default OS cursor
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
@@ -23,6 +29,7 @@ func _ready():
 	cursor_sprite.texture = wheat_cursor  # default cursor
 	cursor_sprite.scale = Vector2(2, 2)
 	add_child(cursor_sprite)
+	
 
 	# Connect toolbar buttons
 	$PanelContainer/VBoxContainer/WheatButton.pressed.connect(func(): set_cursor("wheat"))
@@ -48,8 +55,17 @@ func toggle_topsoil_label(state: bool):
 	topsoil_label.visible = state
 	if topsoil_label.visible==true:
 		subsoil_label.visible=false
+		ndvi_label.visible=false
 
 func toggle_subsoil_label(state: bool):
 	subsoil_label.visible = state
 	if subsoil_label.visible==true:
 		topsoil_label.visible=false
+		ndvi_label.visible=false
+		
+func toggle_ndvi_label(state: bool):
+	ndvi_label.visible = state
+	if ndvi_label.visible==true:
+		topsoil_label.visible=false
+		subsoil_label.visible=false
+	

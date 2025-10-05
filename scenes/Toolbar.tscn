@@ -136,11 +136,18 @@ offset_bottom = 17.0
 text = "Topsoil Moisture"
 
 [node name="LabelSubSoilMoisture" type="Label" parent="."]
-offset_left = 3.0
-offset_top = -2.0
-offset_right = 132.0
-offset_bottom = 21.0
+offset_left = 1.0
+offset_top = -6.0
+offset_right = 130.0
+offset_bottom = 17.0
 text = "Subsoil Moisture"
+
+[node name="LabelNDVI" type="Label" parent="."]
+offset_left = 37.0
+offset_top = -6.0
+offset_right = 166.0
+offset_bottom = 17.0
+text = "NDVI"
 
 [node name="SoilMoistureMetric" type="TextureRect" parent="."]
 offset_left = 33.0

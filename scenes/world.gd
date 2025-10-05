@@ -5,6 +5,7 @@ extends Node2D
 @onready var crop_layer = $Crops
 @onready var topsoil = $SoilMoisture
 @onready var subsoil = $SubSoilMoisture
+@onready var ndvi = $NDVI
 @onready var woman_scene = preload("res://scenes/woman.tscn")
 @onready var toolbar = $ToolbarInstance
 @onready var season_label = toolbar.get_node("SeasonTimer/SeasonLabel")
@@ -13,6 +14,7 @@ extends Node2D
 
 signal toggle_topsoil_label_requested
 signal toggle_subsoil_label_requested
+signal toggle_ndvi_label_requested
 #@onready var season_label = $SeasonTimer/SeasonLabel
 #@onready var time_label = $SeasonTimer/TimeLabel
 #@onready var progress_bar = $SeasonTimer/ProgressBar
@@ -125,13 +127,22 @@ func _input(event):
 		var new_state = !topsoil.visible   # calculate new visibility
 		topsoil.visible = new_state
 		subsoil.visible = false
+		ndvi.visible = false
 		emit_signal("toggle_topsoil_label_requested", new_state)  # pass new_state
 	
 	if event.is_action_pressed("toggle_Subsoil"):
 		var new_state = !subsoil.visible
 		subsoil.visible = new_state
 		topsoil.visible = false
+		ndvi.visible = false
 		emit_signal("toggle_subsoil_label_requested", new_state)
+		
+	if event.is_action_pressed("toggle_NDVI"):
+		var new_state = !ndvi.visible
+		ndvi.visible = new_state
+		topsoil.visible = false
+		subsoil.visible = false
+		emit_signal("toggle_ndvi_label_requested", new_state)
 		
 	if event is InputEventMouseButton and event.is_pressed():
 		var tile_pos = get_snapped_position(get_global_mouse_position())
