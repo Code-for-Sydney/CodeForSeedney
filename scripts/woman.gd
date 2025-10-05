@@ -8,6 +8,8 @@ extends CharacterBody2D
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
 
+var is_walking = false
+
 # initialise
 func _ready() -> void:
 	#animation_tree.set("parameters/Idle/blend_position", start_direction)
@@ -37,5 +39,11 @@ func update_animation_parameters(input_direction: Vector2):
 func update_state():
 	if(velocity != Vector2.ZERO):
 		state_machine.travel("Walk")
+		if not is_walking:
+			$walk.play()
+			is_walking = true
 	else:
 		state_machine.travel("Idle")
+		if is_walking:
+			$walk.stop()
+			is_walking = false
