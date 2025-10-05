@@ -11,9 +11,7 @@ extends Node2D
 @onready var time_label = $SeasonTimer/TimeLabel
 @onready var progress_bar = $SeasonTimer/ProgressBar
 
-var water_level : Dictionary
 var crop : Dictionary
-
 @export var block : Dictionary[String, BlockData]
 
 var auto_save_timer : Timer
@@ -36,6 +34,8 @@ func _ready():
 	var woman_instance = woman_scene.instantiate()
 	add_child(woman_instance)
 	woman_instance.position = Vector2(100, 100)
+	
+	Global.initialize_water_level(topsoil)
 
 func load_world_state():
 	"""Load the world state from Global if it exists"""
@@ -43,7 +43,7 @@ func load_world_state():
 		var save_data = Global.current_world_scene as SaveGame
 		var world_state = save_data.load_world_state()
 		
-		water_level = world_state.water_levels
+		Global.water_level = world_state.water_levels
 		
 		crop = world_state.crop_data
 		for pos in crop:
@@ -69,7 +69,7 @@ func load_world_state():
 func get_world_state() -> Dictionary:
 	"""Return current world state for saving"""
 	return {
-		"water_levels": water_level,
+		"water_levels": Global.water_level,
 		"crop_data": crop
 	}
 
@@ -87,14 +87,14 @@ func _physics_process(delta: float) -> void:
 	# Update timer UI
 	update_timer_ui()
 	
-	for pos in water_level:
+	"""for pos in water_level:
 		water_level[pos] -= delta
 		if water_level[pos] <= 0:
 			water_level.erase(pos)
-			drying_tile(pos)
+			drying_tile(pos)"""
 			
 	for pos in crop:
-		if water_level.has(pos):
+		if Global.water_level.has(pos):
 			crop[pos]["duration"] += delta
 			
 			var duration = crop[pos]["duration"]
@@ -163,9 +163,19 @@ func set_tile(tile_name: String, cell_pos: Vector2i, layer: TileMapLayer, coord:
 		layer.set_cell(cell_pos, block[tile_name].source_id, block[tile_name].atlas_coords[coord])
 
 func watering_tile(tile_name: String, pos: Vector2i, amount: float = 1.0):
-	if Global.water > 0:
-		water_level[pos] = amount
-		Global.water -= 1
+	print("watering", Global.water_level[pos])
+	print("source count", topsoil.tile_set.get_source(1).get_tile_id(0))
+	print("source count", topsoil.tile_set.get_source(1).get_tile_id(1))
+	print("source count", topsoil.tile_set.get_source(1).get_tile_id(2))
+	print("source count", topsoil.tile_set.get_source(1).get_tile_id(3))
+	print(topsoil.tile_set.find_tile_by_source(1, "(1, 0)"))
+	if not Global.water_level.has(pos):
+		print("No tile data found at position: ", pos)
+		return
+	if  Global.water_level[pos] < 0.4:
+		Global.water_level[pos] += 0.05
+	print("watered", Global.water_level[pos])
+	topsoil.set_cell(pos, 7)
 
 func drying_tile(pos):
 	var tile_pos = get_snapped_position(pos)

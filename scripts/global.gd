@@ -5,6 +5,7 @@ var budget: int = 1000
 var crops = { "corn" : 10, "wheat" : 10, "soy" : 10 }
 var water = 10
 var fertiliser = 10
+var water_level = {}
 
 var player_name: String = ""
 var selected_state: String = ""
@@ -107,10 +108,10 @@ func start_new_game(player_name_input: String, state_input: String):
 	selected_state = state_input
 	game_start_time = Time.get_datetime_string_from_system()
 	session_start_time = Time.get_ticks_msec() / 1000.0
-	
 	budget = 1000
 	crops = { "corn" : 10, "wheat" : 10, "soy" : 10 }
 	water = 10
+	water_level = {}
 	fertiliser = 10
 	current_tool = "corn"
 
@@ -130,6 +131,7 @@ func save_game():
 		"budget": budget,
 		"crops": crops,
 		"water": water,
+		"water_level": water_level,
 		"fertiliser": fertiliser,
 		"current_tool": current_tool,
 		"play_time_seconds": (Time.get_ticks_msec() / 1000.0) - session_start_time,
@@ -395,3 +397,12 @@ func get_state_info(state_name: String) -> Dictionary:
 		return state_data[state_name]
 	else:
 		return {"temp": 70, "moisture": 60, "sunlight": 8.0, "rainfall": 35, "difficulty": "medium"}
+
+func initialize_water_level(layer):
+	print("initializing water")
+	for cell_pos in layer.get_used_cells():
+		var topsoil_data = layer.get_cell_tile_data(cell_pos)
+		var topsoil_waterlevel = topsoil_data.get_custom_data("water_level")
+		water_level[Vector2i(cell_pos)] = topsoil_waterlevel
+	print("initializedd")
+	print(water_level)
