@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://nsjmsmals10j"]
+[gd_scene load_steps=3 format=3 uid="uid://nsjmsmals10j"]
 
 [ext_resource type="Script" uid="uid://3b5qse7i7h5c" path="res://scenes/MainMenu.gd" id="1_7xk4v"]
+[ext_resource type="AudioStream" uid="uid://bh258xvppluy7" path="res://audio/game-music-loop-6-144641.ogg" id="2_0ykhv"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -136,3 +137,6 @@ text = "Back"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Start Game"
+
+[node name="background_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0ykhv")

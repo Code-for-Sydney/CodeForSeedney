@@ -29,6 +29,9 @@ func _ready():
 	if back_button:
 		back_button.pressed.connect(_on_back_pressed)
 	
+	$background_audio.pitch_scale = randf_range(0.9, 1.1)
+	$background_audio.play()
+	
 	setup_state_dropdown()
 	
 	setup_save_info()

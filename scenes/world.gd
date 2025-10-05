@@ -42,6 +42,8 @@ func _ready():
 	woman_instance.position = Vector2(100, 100)
 	
 	Global.initialize_water_level(topsoil)
+	
+	$background_audio.play()
 
 func load_world_state():
 	"""Load the world state from Global if it exists"""
@@ -148,7 +150,7 @@ func _input(event):
 				$Crops/plant_audio.pitch_scale = randf_range(0.9, 1.1)
 				$Crops/plant_audio.play()
 			else:
-				$Crops/unplant_audio.pitch_scale = randf_range(0.9, 1.1)
+				$Crops/unplant_audio.pitch_scale = randf_range(0.8, 1.1)
 				$Crops/unplant_audio.play()
 
 func plant_crop(tile_pos: Vector2i) -> bool:
