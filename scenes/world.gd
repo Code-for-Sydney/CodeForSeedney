@@ -109,6 +109,9 @@ func _input(event):
 	if event.is_action_pressed("toggle_SMAPTop"):
 		$SoilMoisture.visible = !$SoilMoisture.visible
 		
+	if event.is_action_pressed("toggle_Subsoil"):
+		$SubSoilMoisture.visible = !$SubSoilMoisture.visible
+		
 	if event is InputEventMouseButton and event.is_pressed():
 		var tile_pos = get_snapped_position(get_global_mouse_position())
 		
