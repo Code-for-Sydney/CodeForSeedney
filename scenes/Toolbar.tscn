@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfct3bhgs0xll"]
+[gd_scene load_steps=12 format=3 uid="uid://dfct3bhgs0xll"]
 
 [ext_resource type="Script" uid="uid://pn364ya2bedm" path="res://canvas_layer.gd" id="1_ek3oe"]
 [ext_resource type="Texture2D" uid="uid://c363ej60y1gt7" path="res://images/WoodMenu.png" id="2_8nnf0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://nrbm8pniuh27" path="res://scripts/label_corn.gd" id="5_dqqml"]
 [ext_resource type="Script" uid="uid://dk0qrlexbt8vi" path="res://scripts/label_budget.gd" id="6_j4tml"]
 [ext_resource type="Script" uid="uid://b3entvyot8e86" path="res://scenes/label_water.gd" id="7_qv1hn"]
+[ext_resource type="Texture2D" uid="uid://20oaravm18tl" path="res://moisture.png" id="8_j4tml"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rp54d"]
 texture = ExtResource("2_8nnf0")
@@ -140,6 +141,14 @@ offset_top = -2.0
 offset_right = 132.0
 offset_bottom = 21.0
 text = "Subsoil Moisture"
+
+[node name="SoilMoistureMetric" type="TextureRect" parent="."]
+offset_left = 33.0
+offset_top = 34.0
+offset_right = 161.0
+offset_bottom = 54.0
+rotation = 1.5707964
+texture = ExtResource("8_j4tml")
 
 [connection signal="pressed" from="Button_buy_corn" to="Label_corn" method="_on_button_buy_corn_pressed"]
 [connection signal="pressed" from="Button_buy_water" to="Label_water" method="_on_button_buy_water_pressed"]

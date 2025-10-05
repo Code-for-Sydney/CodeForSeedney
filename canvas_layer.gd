@@ -5,11 +5,16 @@ extends CanvasLayer
 @onready var wheat_cursor =preload("res://images/opengameart_josehzz/WheatCursor.tres")
 @onready var corn_cursor = preload("res://images/opengameart_josehzz/CornCursor.tres")
 @onready var waterjug_cursor = preload("res://images/WaterJug.png")
-
+@onready var topsoil_label = $LabelSoilMoisture
+@onready var subsoil_label = $LabelSubSoilMoisture
 
 var cursor_sprite: Sprite2D
 
 func _ready():
+	# Connect to World Signals
+	var world = get_parent()  # World is the parent
+	world.connect("toggle_topsoil_label_requested", Callable(self, "toggle_topsoil_label"))
+	world.connect("toggle_subsoil_label_requested", Callable(self, "toggle_subsoil_label"))
 	# Hide the default OS cursor
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
@@ -39,3 +44,12 @@ func set_cursor(tool_name: String):
 		"water":
 			cursor_sprite.scale = Vector2(0.7,0.7)
 			cursor_sprite.texture = waterjug_cursor
+func toggle_topsoil_label(state: bool):
+	topsoil_label.visible = state
+	if topsoil_label.visible==true:
+		subsoil_label.visible=false
+
+func toggle_subsoil_label(state: bool):
+	subsoil_label.visible = state
+	if subsoil_label.visible==true:
+		topsoil_label.visible=false

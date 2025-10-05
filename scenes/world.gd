@@ -10,6 +10,9 @@ extends Node2D
 @onready var season_label = toolbar.get_node("SeasonTimer/SeasonLabel")
 @onready var time_label = toolbar.get_node("SeasonTimer/TimeLabel")
 @onready var progress_bar = toolbar.get_node("SeasonTimer/ProgressBar")
+
+signal toggle_topsoil_label_requested
+signal toggle_subsoil_label_requested
 #@onready var season_label = $SeasonTimer/SeasonLabel
 #@onready var time_label = $SeasonTimer/TimeLabel
 #@onready var progress_bar = $SeasonTimer/ProgressBar
@@ -117,13 +120,18 @@ func _physics_process(delta: float) -> void:
 				set_tile(crop_name, pos, crop_layer, index)
 
 func _input(event):
+	
 	if event.is_action_pressed("toggle_SMAPTop"):
+		var new_state = !topsoil.visible   # calculate new visibility
+		topsoil.visible = new_state
 		subsoil.visible = false
-		topsoil.visible = !topsoil.visible
-		
+		emit_signal("toggle_topsoil_label_requested", new_state)  # pass new_state
+	
 	if event.is_action_pressed("toggle_Subsoil"):
+		var new_state = !subsoil.visible
+		subsoil.visible = new_state
 		topsoil.visible = false
-		subsoil.visible = !subsoil.visible
+		emit_signal("toggle_subsoil_label_requested", new_state)
 		
 	if event is InputEventMouseButton and event.is_pressed():
 		var tile_pos = get_snapped_position(get_global_mouse_position())
