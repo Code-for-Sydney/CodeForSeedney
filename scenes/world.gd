@@ -141,9 +141,6 @@ func _input(event):
 			var harvested = harvesting(tile_pos)
 			if harvested:
 				Global.save_game()
-				
-		if event.button_index == MOUSE_BUTTON_RIGHT:
-			plant_crop(tile_pos)
 			
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			var planted = plant_crop(tile_pos)
