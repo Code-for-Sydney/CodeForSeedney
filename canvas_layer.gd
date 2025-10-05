@@ -16,7 +16,7 @@ func _ready():
 	# Create the Sprite2D cursor
 	cursor_sprite = Sprite2D.new()
 	cursor_sprite.texture = wheat_cursor  # default cursor
-	cursor_sprite.scale = Vector2(4, 4)
+	cursor_sprite.scale = Vector2(2, 2)
 	add_child(cursor_sprite)
 
 	# Connect toolbar buttons
@@ -32,10 +32,10 @@ func set_cursor(tool_name: String):
 	match tool_name:
 		"wheat":
 			cursor_sprite.texture = wheat_cursor
-			cursor_sprite.scale = Vector2(4, 4)
+			cursor_sprite.scale = Vector2(2, 2)
 		"corn":
 			cursor_sprite.texture = corn_cursor
-			cursor_sprite.scale = Vector2(5, 5)
+			cursor_sprite.scale = Vector2(2.5, 2.5)
 		"water":
-			cursor_sprite.scale = Vector2(1.5,1.5)
+			cursor_sprite.scale = Vector2(0.7,0.7)
 			cursor_sprite.texture = waterjug_cursor
