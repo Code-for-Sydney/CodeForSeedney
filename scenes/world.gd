@@ -3,6 +3,8 @@ extends Node2D
 @onready var ground = $Ground
 @onready var ground_mask = $GroundMask
 @onready var crop_layer = $Crops
+@onready var topsoil = $SoilMoisture
+@onready var subsoil = $SubSoilMoisture
 @onready var woman_scene = preload("res://scenes/woman.tscn")
 
 @onready var season_label = $SeasonTimer/SeasonLabel
@@ -107,12 +109,12 @@ func _physics_process(delta: float) -> void:
 
 func _input(event):
 	if event.is_action_pressed("toggle_SMAPTop"):
-		$SubSoilMoisture.visible = false
-		$SoilMoisture.visible = !$SoilMoisture.visible
+		subsoil.visible = false
+		topsoil.visible = !topsoil.visible
 		
 	if event.is_action_pressed("toggle_Subsoil"):
-		$SoilMoisture.visible = false
-		$SubSoilMoisture.visible = !$SubSoilMoisture.visible
+		topsoil.visible = false
+		subsoil.visible = !subsoil.visible
 		
 	if event is InputEventMouseButton and event.is_pressed():
 		var tile_pos = get_snapped_position(get_global_mouse_position())
