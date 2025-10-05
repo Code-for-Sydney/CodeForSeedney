@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://7mdl66wvyg0l"]
+[gd_scene load_steps=29 format=3 uid="uid://7mdl66wvyg0l"]
 
 [ext_resource type="Script" uid="uid://bon1of217u4eq" path="res://scripts/woman.gd" id="1_lbwyf"]
 [ext_resource type="Texture2D" uid="uid://bb4rtgff41pk0" path="res://images/RPG Top Down Characters - Free Version/Blue Haired Woman/blue_haired_woman_shadow.png" id="1_so33h"]
+[ext_resource type="AudioStream" uid="uid://b4eqfgyh4gviy" path="res://audio/running-video-game-330951_2.ogg" id="3_kset0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_so33h"]
 size = Vector2(12, 8)
@@ -258,3 +259,6 @@ parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kset0")

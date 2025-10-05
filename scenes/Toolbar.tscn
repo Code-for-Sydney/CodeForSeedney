@@ -140,3 +140,6 @@ offset_top = -2.0
 offset_right = 132.0
 offset_bottom = 21.0
 text = "Subsoil Moisture"
+
+[connection signal="pressed" from="Button_buy_corn" to="Label_corn" method="_on_button_buy_corn_pressed"]
+[connection signal="pressed" from="Button_buy_water" to="Label_water" method="_on_button_buy_water_pressed"]
