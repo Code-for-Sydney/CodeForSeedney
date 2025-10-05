@@ -98,7 +98,7 @@ func _physics_process(delta: float) -> void:
 	update_timer_ui()
 	physics_timer += delta
 	
-	if physics_timer > 5:
+	if physics_timer > 20:
 		for pos in Global.water_level:
 			if Global.water_level[pos] > 0:
 				Global.water_level[pos] -= 0.05
